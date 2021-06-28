@@ -519,7 +519,7 @@ container.setAttribute('class', 'container');
 // cardbody.append(cardtitle, cardtext);
 // carddiv.append(cardbody);
 // container.append(carddiv);
-let pagechecker = 1; //use button to change page
+let pagechecker = 0;
 // let pagechangedbutton = 0;
 let pagecards = 5;
 let datalength = data.length;
@@ -527,8 +527,10 @@ let pages = datalength / pagecards;
 
 function cards(pagenumberbutton) {
   if (typeof carddiv !== 'undefined') {
-    document.getElementById('cards').remove();
+    document.getElementById('cards').innerHTML = '';
+    // container.carddiv.remove();
   }
+
   let cardschange = pagecards * pagenumberbutton;
   let i = cardschange - 5;
   for (i; i < cardschange; i++) {
@@ -546,8 +548,8 @@ function cards(pagenumberbutton) {
       'Name is ' + data[i].name + ' and my mail is ' + data[i].email;
 
     cardbody.append(cardtitle, cardtext);
-    carddiv.appendChild(cardbody);
-    container.appendChild(carddiv);
+    carddiv.append(cardbody);
+    container.append(carddiv);
   }
 }
 
@@ -570,6 +572,7 @@ function button(j) {
   button.setAttribute('class', 'page-link');
   button.id = j;
   button.innerText = j;
+
   button.addEventListener('click', () => {
     cards(j);
   });
