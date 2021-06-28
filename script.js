@@ -523,25 +523,28 @@ let pagenumberbutton = 1; //use button to change page
 let pagecards = 5;
 let datalength = data.length;
 let pages = datalength / pagecards;
-let cardschange = pagecards * pagenumberbutton;
-let i = cardschange - 5;
 
-for (i; i < cardschange; i++) {
-  let carddiv = document.createElement('div');
-  carddiv.setAttribute('class', 'card my-5');
-  let cardbody = document.createElement('div');
-  cardbody.setAttribute('class', 'card-body');
-  let cardtitle = document.createElement('h4');
-  cardtitle.setAttribute('class', 'card-title');
-  cardtitle.innerText = data[i].id;
-  let cardtext = document.createElement('div');
-  cardtext.setAttribute('class', 'card-text');
-  cardtext.textContent =
-    'Name is ' + data[i].name + ' and my mail is ' + data[i].email;
-  cardbody.append(cardtitle, cardtext);
-  carddiv.append(cardbody);
-  container.append(carddiv);
+function cards(pagenumberbutton) {
+  let cardschange = pagecards * pagenumberbutton;
+  let i = cardschange - 5;
+  for (i; i < cardschange; i++) {
+    let carddiv = document.createElement('div');
+    carddiv.setAttribute('class', 'card my-5');
+    let cardbody = document.createElement('div');
+    cardbody.setAttribute('class', 'card-body');
+    let cardtitle = document.createElement('h4');
+    cardtitle.setAttribute('class', 'card-title');
+    cardtitle.innerText = data[i].id;
+    let cardtext = document.createElement('div');
+    cardtext.setAttribute('class', 'card-text');
+    cardtext.textContent =
+      'Name is ' + data[i].name + ' and my mail is ' + data[i].email;
+    cardbody.append(cardtitle, cardtext);
+    carddiv.append(cardbody);
+    container.append(carddiv);
+  }
 }
+cards(pagenumberbutton);
 let pagenav = document.createElement('nav');
 // pagenav.setAttribute('class', 'd-inline');
 let ul = document.createElement('ul');
@@ -550,12 +553,12 @@ ul.setAttribute('class', 'pagination');
 for (let j = 1; j <= pages; j++) {
   let li = document.createElement('li');
   li.setAttribute('class', 'page-item');
-  let a = document.createElement('a');
-  a.setAttribute('class', 'page-link');
-  a.href = '#';
+  let button = document.createElement('button');
+  button.setAttribute('class', 'page-link');
+  button.id = j;
 
-  a.innerText = j;
-  li.append(a);
+  button.innerText = j;
+  li.append(button);
   ul.append(li);
   pagenav.append(ul);
   container.append(pagenav);
