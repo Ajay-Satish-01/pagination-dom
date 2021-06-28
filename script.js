@@ -519,17 +519,22 @@ container.setAttribute('class', 'container');
 // cardbody.append(cardtitle, cardtext);
 // carddiv.append(cardbody);
 // container.append(carddiv);
-let pagenumberbutton = 1; //use button to change page
+let pagechecker = 1; //use button to change page
+// let pagechangedbutton = 0;
 let pagecards = 5;
 let datalength = data.length;
 let pages = datalength / pagecards;
 
 function cards(pagenumberbutton) {
+  if (typeof carddiv !== 'undefined') {
+    document.getElementById('cards').remove();
+  }
   let cardschange = pagecards * pagenumberbutton;
   let i = cardschange - 5;
   for (i; i < cardschange; i++) {
     let carddiv = document.createElement('div');
     carddiv.setAttribute('class', 'card my-5');
+    carddiv.id = 'cards';
     let cardbody = document.createElement('div');
     cardbody.setAttribute('class', 'card-body');
     let cardtitle = document.createElement('h4');
@@ -539,12 +544,13 @@ function cards(pagenumberbutton) {
     cardtext.setAttribute('class', 'card-text');
     cardtext.textContent =
       'Name is ' + data[i].name + ' and my mail is ' + data[i].email;
+
     cardbody.append(cardtitle, cardtext);
-    carddiv.append(cardbody);
-    container.append(carddiv);
+    carddiv.appendChild(cardbody);
+    container.appendChild(carddiv);
   }
 }
-cards(pagenumberbutton);
+
 let pagenav = document.createElement('nav');
 // pagenav.setAttribute('class', 'd-inline');
 let ul = document.createElement('ul');
@@ -553,15 +559,22 @@ ul.setAttribute('class', 'pagination');
 for (let j = 1; j <= pages; j++) {
   let li = document.createElement('li');
   li.setAttribute('class', 'page-item');
-  let button = document.createElement('button');
-  button.setAttribute('class', 'page-link');
-  button.id = j;
-
-  button.innerText = j;
-  li.append(button);
+  let btn = button(j);
+  li.append(btn);
   ul.append(li);
   pagenav.append(ul);
   container.append(pagenav);
+}
+function button(j) {
+  let button = document.createElement('button');
+  button.setAttribute('class', 'page-link');
+  button.id = j;
+  button.innerText = j;
+  button.addEventListener('click', () => {
+    cards(j);
+  });
+
+  return button;
 }
 
 document.body.append(container);
