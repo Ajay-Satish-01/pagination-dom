@@ -504,6 +504,9 @@ let data = [
 //dom
 let container = document.createElement('div');
 container.setAttribute('class', 'container');
+let container2 = document.createElement('div');
+container2.setAttribute('class', 'container my-5');
+container2.id = 'container2';
 //should be in loop
 
 // let carddiv = document.createElement('div');
@@ -527,7 +530,9 @@ let pages = datalength / pagecards;
 
 function cards(pagenumberbutton) {
   if (typeof carddiv !== 'undefined') {
-    document.getElementById('cards').innerHTML = '';
+    let cardid = document.getElementById('cards');
+    let cardbodyid = document.getElementById('cardbody');
+    cardid.removeChild(cardbodyid);
     // container.carddiv.remove();
   }
 
@@ -539,6 +544,7 @@ function cards(pagenumberbutton) {
     carddiv.id = 'cards';
     let cardbody = document.createElement('div');
     cardbody.setAttribute('class', 'card-body');
+    cardbody.id = 'cardbody';
     let cardtitle = document.createElement('h4');
     cardtitle.setAttribute('class', 'card-title');
     cardtitle.innerText = data[i].id;
@@ -549,7 +555,7 @@ function cards(pagenumberbutton) {
 
     cardbody.append(cardtitle, cardtext);
     carddiv.append(cardbody);
-    container.append(carddiv);
+    container2.append(carddiv);
   }
 }
 
@@ -580,4 +586,4 @@ function button(j) {
   return button;
 }
 
-document.body.append(container);
+document.body.append(container, container2);
