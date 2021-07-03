@@ -529,10 +529,9 @@ let datalength = data.length;
 let pages = datalength / pagecards;
 
 function cards(pagenumberbutton) {
-  if (typeof carddiv !== 'undefined') {
-    let cardid = document.getElementById('cards');
-    let cardbodyid = document.getElementById('cardbody');
-    cardid.removeChild(cardbodyid);
+  // typeof carddiv !== 'undefined';
+  if (pagenumberbutton) {
+    document.getElementById('container2').innerHTML = '';
     // container.carddiv.remove();
   }
 
